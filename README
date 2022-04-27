@@ -1,0 +1,8 @@
+http://localhost:8181/表名如orders/操作名如findAll
+
+Receiver=1，夹爪，task=1:7，move，task=8single，task=9、10、11将基座、原料、试管从仓库移到实验台
+Receiver=2，移液，task=1移液
+Receiver=3，针管，task=1，取样，task=2，换针头
+Receiver=4，反应区，task=1加热，task=2，搅拌，task=3，加压，task=4，光照，task=5，备用
+Receiver=5，检测，task=1，
+Receiver=6，task=1，固体化学药品添加
