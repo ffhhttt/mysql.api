@@ -30,6 +30,7 @@ public class ExperimentlogHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Experimentlog experimentlog){
+        experimentlog.setId(experimentlogRepository.getMaxID() + 1);
         Experimentlog result = experimentlogRepository.save(experimentlog);
         if(result != null){
             return "success";
