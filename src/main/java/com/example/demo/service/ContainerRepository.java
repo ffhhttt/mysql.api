@@ -15,4 +15,7 @@ public interface ContainerRepository extends JpaRepository<Container,Integer> {
     List<Container> findByNameLike(String name);
     @Query(value = "select * from container where place like %?1%", nativeQuery = true)
     List<Container> findByPlaceLike(String place);
+
+    @Query(value = "select max(id) from container;", nativeQuery = true)
+    Integer getMaxID();
 }
