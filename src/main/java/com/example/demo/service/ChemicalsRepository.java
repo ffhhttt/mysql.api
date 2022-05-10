@@ -15,4 +15,7 @@ public interface ChemicalsRepository extends JpaRepository<Chemicals,Integer> {
     List<Chemicals> findByNameLike(String name);
     @Query(value = "select * from chemicals where place like %?1%", nativeQuery = true)
     List<Chemicals> findByPlaceLike(String place);
+
+    @Query(value = "select max(id) from chemicals;", nativeQuery = true)
+    Integer getMaxID();
 }
