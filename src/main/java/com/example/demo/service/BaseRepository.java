@@ -19,6 +19,7 @@ public interface BaseRepository extends JpaRepository<Base,Integer> {
     @Query(value = "select * from base where place like %?1%", nativeQuery = true)
     List<Base> findByPlaceLike(String place);
 
-
+    @Query(value = "select max(id) from base;", nativeQuery = true)
+    Integer getMaxID();
 
 }
