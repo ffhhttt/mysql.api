@@ -30,6 +30,7 @@ public class ExperimentsHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Experiments experiments){
+        experiments.setId(experimentsRepository.getMaxID() + 1);
         Experiments result = experimentsRepository.save(experiments);
         if(result != null){
             return "success";
