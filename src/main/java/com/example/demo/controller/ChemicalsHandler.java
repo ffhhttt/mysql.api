@@ -30,6 +30,7 @@ public class ChemicalsHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Chemicals chemicals){
+        chemicals.setId(chemicalsRepository.getMaxID() + 1);
         Chemicals result = chemicalsRepository.save(chemicals);
         if(result != null){
             return "success";
