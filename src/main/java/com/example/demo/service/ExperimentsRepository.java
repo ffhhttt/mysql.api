@@ -15,4 +15,6 @@ public interface ExperimentsRepository extends JpaRepository<Experiments,Integer
     @Query(value = "select * from experiments where experimentName like %?1%", nativeQuery = true)
     List<Experiments> findByExperimentnameLike(String experimentname);
 
+    @Query(value = "select max(id) from experiments;", nativeQuery = true)
+    Integer getMaxID();
 }
