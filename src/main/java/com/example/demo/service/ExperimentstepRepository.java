@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.Experiments;
 import com.example.demo.entity.Experimentstep;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -19,4 +21,7 @@ public interface ExperimentstepRepository extends JpaRepository<Experimentstep,I
     List<Experimentstep> findByExperimentsIdAndStepAndStarttime(Integer experimentsId,Integer step,Integer starttime);
     List<Experimentstep> findByExperimentsIdAndReceiver(Integer experimentsId,Integer receiver);
     List<Experimentstep> findByExperimentsIdAndReceiverAndTask(Integer experimentsId,Integer receiver,Integer task);
+
+    @Query(value = "select max(id) from experimentstep;", nativeQuery = true)
+    Integer getMaxID();
 }
