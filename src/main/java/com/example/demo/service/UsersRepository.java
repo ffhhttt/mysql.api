@@ -20,4 +20,7 @@ public interface UsersRepository extends JpaRepository<Users,Integer> {
 
     @Query(value = "select * from users where schoolId like %?1%", nativeQuery = true)
     List<Users> findBySchoolidLike(String schoolId);
+
+    @Query(value = "select max(id) from users;", nativeQuery = true)
+    Integer getMaxID();
 }
