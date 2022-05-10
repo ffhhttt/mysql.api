@@ -35,7 +35,7 @@ public class ExperimentstepHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Experimentstep experimentstep){
-
+        experimentstep.setId(experimentstepRepository.getMaxID() + 1);
         Experimentstep result = experimentstepRepository.save(experimentstep);
 
         if(result != null){
