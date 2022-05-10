@@ -30,6 +30,7 @@ public class ContainerHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Container container){
+        container.setId(containerRepository.getMaxID() + 1);
         Container result = containerRepository.save(container);
         if(result != null){
             return "success";
