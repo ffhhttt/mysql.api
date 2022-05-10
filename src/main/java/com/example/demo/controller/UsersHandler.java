@@ -30,6 +30,7 @@ public class UsersHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Users users){
+        users.setId(usersRepository.getMaxID() + 1);
         Users result = usersRepository.save(users);
         if(result != null){
             return "success";
