@@ -30,6 +30,7 @@ public class BaseHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Base base){
+        base.setId(baseRepository.getMaxID() + 1);
         Base result = baseRepository.save(base);
         if(result != null){
             return "success";
