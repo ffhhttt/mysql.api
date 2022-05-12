@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.entity.Base;
 import com.example.demo.entity.Container;
 import com.example.demo.service.ContainerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/container")
@@ -30,7 +32,9 @@ public class ContainerHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Container container){
-        Container result = containerRepository.save(container);
+        Integer maxId = containerRepository.getMaxID();
+        containerRepository.rewriteSave(maxId,container.getName(),container.getPlace());
+        Optional<Container> result = containerRepository.findById(maxId);
         if(result != null){
             return "success";
         }else{

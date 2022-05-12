@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/experimentstep")
@@ -35,15 +36,23 @@ public class ExperimentstepHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Experimentstep experimentstep){
-
-        Experimentstep result = experimentstepRepository.save(experimentstep);
-
+        Integer maxId = experimentstepRepository.getMaxID();
+        experimentstepRepository.rewriteSave(maxId,experimentstep.getExperimentsId(),experimentstep.getStep(),
+                experimentstep.getStarttime(),experimentstep.getReceiver(),experimentstep.getTask(),experimentstep.getBaseId(),
+                experimentstep.getContainerId(),experimentstep.getChemicalsId(),experimentstep.getX(),experimentstep.getY(),experimentstep.getZ(),
+                experimentstep.getUsages(),experimentstep.getAddSpeed(),experimentstep.getStartPos(),experimentstep.getEndPos(),
+                experimentstep.getTubesMove(),experimentstep.getTubesPlatform(),experimentstep.getTubesReaction(),experimentstep.getDurationMin(),
+                experimentstep.getTemperature(),experimentstep.getReactSpeed(),experimentstep.getPressure(),experimentstep.getLight(),
+                experimentstep.getBackupReact(),experimentstep.getSingletaskStart(),experimentstep.getSingletaskEnd(),experimentstep.getSamplePos_1(),
+                experimentstep.getSamplePos_2(),experimentstep.getIntervals(),experimentstep.getSampleVolume(),experimentstep.getHplcCount(),
+                experimentstep.getHplcVolume(),experimentstep.getHplcInvolume(),experimentstep.getWavelength(),experimentstep.getProportion(),
+                experimentstep.getFlowrate(),experimentstep.getHplcTime());
+        Optional<Experimentstep> result = experimentstepRepository.findById(maxId);
         if(result != null){
             return "success";
         }else{
             return "error";
         }
-
     }
 
     @GetMapping("/findById/{id}")
