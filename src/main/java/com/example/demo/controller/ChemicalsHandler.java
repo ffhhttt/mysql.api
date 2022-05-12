@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.entity.Base;
 import com.example.demo.entity.Chemicals;
 import com.example.demo.service.ChemicalsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/chemicals")
@@ -30,7 +32,9 @@ public class ChemicalsHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Chemicals chemicals){
-        Chemicals result = chemicalsRepository.save(chemicals);
+        Integer maxId = chemicalsRepository.getMaxID();
+        chemicalsRepository.rewriteSave(maxId,chemicals.getName(),chemicals.getPlace(),chemicals.getStock(),chemicals.getType());
+        Optional<Chemicals> result = chemicalsRepository.findById(maxId);
         if(result != null){
             return "success";
         }else{

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.entity.Base;
 import com.example.demo.entity.Experimentlog;
 import com.example.demo.service.ExperimentlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/experimentlog")
@@ -30,7 +32,9 @@ public class ExperimentlogHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Experimentlog experimentlog){
-        Experimentlog result = experimentlogRepository.save(experimentlog);
+        Integer maxId = experimentlogRepository.getMaxID();
+        experimentlogRepository.rewriteSave(maxId,experimentlog.getExperimentsId(),experimentlog.getStarttime(),experimentlog.getEndtime(),experimentlog.getUsersId(),experimentlog.getStandby());
+        Optional<Experimentlog> result = experimentlogRepository.findById(maxId);
         if(result != null){
             return "success";
         }else{

@@ -19,6 +19,8 @@ class ExperimentstepRepositoryTest {
     @Autowired
     private ExperimentsRepository experimentsRepository;
 
+
+
    /* @Test
     void test(){
         Experimentstep experimentstep= new Experimentstep();
@@ -30,15 +32,25 @@ class ExperimentstepRepositoryTest {
 
     @Test
     void test2(){
-        Experimentstep experimentstep= new Experimentstep();
-        experimentstep.setExperimentsId(6);
-        Experiments experiments = new Experiments();
-        experiments.setId(experimentstep.getExperimentsId());
-        Timestamp d = new Timestamp(System.currentTimeMillis());
-        experiments.setUpdatetime(d);
-        experiments.setExperimentname("s");
-        experimentsRepository.save(experiments);
+//        Experimentstep experimentstep= new Experimentstep();
+//
+//        experimentstep.setExperimentsId(3);
+//        experimentstep.setStep(10);
+//        experimentstep.setReceiver(6);
+//        experimentstep.setTask(2);
 
+        Integer id = experimentstepRepository.getMaxID();
+
+//        experimentstepRepository.rewriteSave(experimentstepRepository.getMaxID(),experimentstep.getExperimentsId(),experimentstep.getStep(),
+//                experimentstep.getStarttime(),experimentstep.getReceiver(),experimentstep.getTask(),experimentstep.getBaseId(),
+//                experimentstep.getContainerId(),experimentstep.getChemicalsId(),experimentstep.getX(),experimentstep.getY(),experimentstep.getZ(),
+//                experimentstep.getUsages(),experimentstep.getAddSpeed(),experimentstep.getStartPos(),experimentstep.getEndPos(),
+//                experimentstep.getTubesMove(),experimentstep.getTubesPlatform(),experimentstep.getTubesReaction(),experimentstep.getDurationMin(),
+//                experimentstep.getTemperature(),experimentstep.getReactSpeed(),experimentstep.getPressure(),experimentstep.getLight(),
+//                experimentstep.getBackupReact(),experimentstep.getSingletaskStart(),experimentstep.getSingletaskEnd(),experimentstep.getSamplePos_1(),
+//                experimentstep.getSamplePos_2(),experimentstep.getIntervals(),experimentstep.getSampleVolume(),experimentstep.getHplcCount(),
+//                experimentstep.getHplcVolume(),experimentstep.getHplcInvolume(),experimentstep.getWavelength(),experimentstep.getProportion(),
+//                experimentstep.getFlowrate(),experimentstep.getHplcTime());
     }
 
    /* @Test

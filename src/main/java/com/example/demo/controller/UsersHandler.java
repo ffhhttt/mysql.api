@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.entity.Base;
 import com.example.demo.entity.Users;
 import com.example.demo.service.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -30,7 +32,9 @@ public class UsersHandler {
 
     @PostMapping("/save")
     public String save(@RequestBody Users users){
-        Users result = usersRepository.save(users);
+        Integer maxId = usersRepository.getMaxID();
+        usersRepository.rewriteSave(maxId,users.getUserName(),users.getPwd(),users.getRealName(),users.getSchoolId());
+        Optional<Users> result = usersRepository.findById(maxId);
         if(result != null){
             return "success";
         }else{
